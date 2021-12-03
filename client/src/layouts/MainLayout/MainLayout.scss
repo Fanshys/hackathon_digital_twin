@@ -1,0 +1,47 @@
+.main-layout {
+  background-color: var(--theme-bg-main);
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+          'header header'
+          'content aside';
+
+  overflow: hidden;
+
+  &__header {
+    grid-area: header;
+  }
+
+  &__aside {
+    grid-area: aside;
+    position: relative;
+    background-color: #fff;
+  }
+
+  &__content {
+    grid-area: content;
+
+    padding-left: 35px;
+    padding-right: 35px;
+
+    padding-top: 35px;
+  }
+
+  &__drag-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -7px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main-layout {
+    &__content {
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 20px;
+    }
+  }
+}
