@@ -5,13 +5,24 @@
     color: inherit;
     display: block;
     font-size: 14px;
-
-    transition: background-color .25s, color .25s;
+    display: flex;
+    align-items: center;
+    fill: #A09FA2;
+    transition: background-color .25s, color .25s, fill .25s;
 
     &:hover,
     &--active {
       color: var(--theme-main);
       background: rgba(0, 118, 246, 0.05);
+      fill: var(--theme-main);
     }
+  }
+
+  &__icon {
+    margin-right: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

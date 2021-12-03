@@ -1,6 +1,10 @@
 <template>
 	<li class="left-menu-item">
-		<RouterLink :class="['left-menu-item__link', classList]" to="#"><slot /></RouterLink>
+		<RouterLink :class="['left-menu-item__link', classList]" to="#">
+			<div class="left-menu-item__icon" v-html="icon">
+			</div>
+			<slot />
+		</RouterLink>
 	</li>
 </template>
 
@@ -12,6 +16,11 @@ export default {
 		active: {
 			type: Boolean,
 			default: false
+		},
+
+		icon: {
+			type: String,
+			default: '',
 		}
 	},
 
