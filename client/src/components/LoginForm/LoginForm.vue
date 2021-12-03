@@ -2,7 +2,7 @@
   <div class="login-form">
     <WtForm @submit="submit">
       <WtInput
-        v-model.trim="$v.formEmail.$model"
+        v-model.trim="$v.formLogin.$model"
         label="Логин"
       />
 
@@ -26,7 +26,7 @@ import WtInput from '../ui/WtInput/WtInput';
 import WtForm from '../ui/WtForm/WtForm';
 import WtButton from '../ui/WtButton/WtButton';
 import {
-  email, password,
+  name, password,
 } from '../../helpers/validation/validation';
 import { mapActions } from 'vuex';
 
@@ -40,12 +40,12 @@ export default {
   },
 
   data: () => ({
-    formEmail: '',
+    formLogin: '',
     formPassword: '',
   }),
 
   validations: {
-    formEmail: email,
+    formLogin: name,
     formPassword: password,
   },
 
@@ -56,7 +56,7 @@ export default {
 
       if (!this.$v.$invalid) {
         this.login({
-          email: this.formEmail,
+          login: this.formLogin,
           password: this.formPassword,
         });
       }
