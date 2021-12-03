@@ -13,7 +13,7 @@
       />
 
       <div>
-        <WtButton :loading="loginIsLoading" class="auth-forms__form-button">
+        <WtButton class="auth-forms__form-button">
           Войти
         </WtButton>
       </div>
