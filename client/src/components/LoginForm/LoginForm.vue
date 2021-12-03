@@ -3,7 +3,7 @@
     <WtForm @submit="submit">
       <WtInput
         v-model.trim="$v.formEmail.$model"
-        label="Email"
+        label="Логин"
       />
 
       <WtInput
