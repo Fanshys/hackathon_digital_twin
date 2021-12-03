@@ -23,5 +23,13 @@ export default {
     } catch (error) {
       commit('setIsAuth', false);
     }
+  },
+
+  async logout({commit}) {
+    commit('setIsAuth', false);
+    commit('setUserInfo', {});
+
+    localStorage.removeItem('user');
+    router.push('/');
   }
 }

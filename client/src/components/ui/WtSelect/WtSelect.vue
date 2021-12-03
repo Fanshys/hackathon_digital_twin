@@ -3,7 +3,7 @@
     <button class="select__button" :class="{'select__button--selected': activeOption.value}" @click="clickHandler">
       {{ activeOption.name || title }}
 
-      <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="select__button-arrow" :class="{'select__button-arrow--active': open}" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.219167 0.437896C0.564174 -0.0652398 1.19346 -0.146814 1.62472 0.255694L6 4.33929L10.3753 0.255694C10.8065 -0.146814 11.4358 -0.0652398 11.7808 0.437896C12.1258 0.941032 12.0559 1.6752 11.6247 2.07771L6.62469 6.74435C6.25947 7.08522 5.74053 7.08522 5.37531 6.74435L0.375339 2.07771C-0.0559198 1.6752 -0.125841 0.941032 0.219167 0.437896Z" fill="#464646"/>
       </svg>
     </button>
@@ -18,6 +18,10 @@
         >
           <button class="select__option-button" @click="optionClickHandler(option)">
             {{option.name}}
+
+            <svg v-if="activeOption.value === option.value" width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5.5L5 9L12.5 1.5" stroke="#0076F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
         </li>
       </ul>
@@ -74,6 +78,7 @@ export default {
     optionClickHandler(option) {
       this.activeOption = option;
       this.open = false;
+      this.$emit('change', this.activeOption.value);
     }
   },
 }

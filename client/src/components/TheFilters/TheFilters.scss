@@ -7,4 +7,24 @@
   padding: 20px 50px;
 
   box-sizing: border-box;
+
+  &__sort {
+    display: flex;
+    gap: 15px;
+  }
+
+  &-button {
+    background: rgba(0, 118, 246, 0.05);
+    border-radius: 10px;
+    border: 0;
+
+    padding: 15px 31px;
+
+    cursor: pointer;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #0076F6;
+  }
 }

@@ -17,6 +17,14 @@
     &--selected {
       color: #403F3F;
     }
+
+    &-arrow {
+      transition: transform .25s ease-out;
+
+      &--active {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &__content {
@@ -27,7 +35,7 @@
     bottom: -10px;
     left: 0;
 
-    transform: translateY(100%);
+    transform: translateY(105%);
 
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.06);
@@ -40,9 +48,12 @@
 
     box-sizing: border-box;
 
+    transition: opacity .2s ease-out, transform .2s ease-out;
+
     &--visible {
       opacity: 1;
       pointer-events: auto;
+      transform: translateY(100%);
     }
   }
 
