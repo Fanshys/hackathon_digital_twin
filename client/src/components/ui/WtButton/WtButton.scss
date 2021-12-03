@@ -22,6 +22,7 @@
   transition: opacity .15s, transform .25s, box-shadow .25s, transform .2s;
 
   position: relative;
+  text-decoration: none;
 
   &__loader {
     background-color: var(--theme-main);
