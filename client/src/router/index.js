@@ -1,26 +1,39 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import AuthPage from '../views/AuthPage/AuthPage.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import AuthPage from '../views/AuthPage/AuthPage.vue';
+import authChecker from './routeHandler';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
+// default layout: MainLayout
 const routes = [
   {
     path: '/',
-    name: 'Auth',
-    component: AuthPage
+    name: 'auth',
+    component: AuthPage,
+    meta: {
+      layout: 'EmptyLayout',
+    },
   },
+
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
-  }
-]
+    path: '/home',
+    name: 'home',
+    component: AuthPage,
+    meta: {
+      layout: 'EmptyLayout',
+    },
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  authChecker(to, from, next);
+});
+
+export default router;
