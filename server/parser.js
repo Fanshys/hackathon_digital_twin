@@ -3,8 +3,6 @@ import path from 'path';
 import cheerio from 'cheerio';
 import {analyze} from './analyze.js';
 
-console.log(analyze('fuck'));
-
 // Рекурсивно получаем все html файлы
 export function getFilesArrayInDir(folder) {
   const files =  fs.readdirSync(folder);
@@ -38,7 +36,8 @@ function parseFile(filePath, searched) {
       link: '',
       icon: '',
       desc: '',
-      previewDesc: ''
+      previewDesc: '',
+      mood: 0
     };
 
     const $ = cheerio.load(data, null, false);
@@ -79,6 +78,10 @@ function parseFile(filePath, searched) {
 
       result.previewDesc = result.desc.substr(leftOffset, rightOffset);
       result.previewDesc += '...';
+    }
+
+    if (result.desc) {
+      result.mood = analyze(result.desc).score;
     }
 
     // Поиск тайтла страницы
