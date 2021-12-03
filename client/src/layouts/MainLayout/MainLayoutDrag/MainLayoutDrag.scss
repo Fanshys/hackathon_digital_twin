@@ -1,0 +1,23 @@
+.main-layout-drag {
+  cursor: grab;
+  width: 14px;
+  opacity: .5;
+  background-color: transparent;
+  padding: 0;
+
+
+  &:hover,
+  &--visible {
+    background-color: var(--theme-main);
+    position: absolute;
+  }
+
+  &--visible {
+    cursor: grabbing;
+  }
+
+  &--no-valid,
+  &--no-valid:hover {
+    background-color: var(--color-red);
+  }
+}
