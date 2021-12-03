@@ -7,7 +7,7 @@
       <div class="feed-card__header">
         <div class="feed-card__header-text">
           <p class="feed-card__header-title">{{title}}</p>
-          <a v-if="link" target="_blank" :href="link" class="feed-card__header-link">{{link}}</a>
+          <a v-if="link" target="_blank" :href="link" class="feed-card__header-link">{{link.substr(0, 60)}}</a>
         </div>
         <div class="feed-card__header-tags">
           <span v-for="tag of tags" :key="tag" class="feed-card__header-tag">

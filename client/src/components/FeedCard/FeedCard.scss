@@ -11,6 +11,8 @@
 
   transition: background-color .3s ease-out;
 
+  max-width: 100%;
+
   &:last-child {
     border-bottom: 1px solid #EAEAEA;
   }
