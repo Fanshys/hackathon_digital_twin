@@ -8,9 +8,23 @@
 
   box-sizing: border-box;
 
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+
   &__sort {
     display: flex;
     gap: 15px;
+  }
+
+  &__search {
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+
+    margin-right: 18px;
   }
 
   &-button {

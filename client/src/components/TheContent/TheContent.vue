@@ -1,6 +1,8 @@
 <template>
   <div class="content">
-    <TheFilters />
+		<div :class="['content__search', classList]"><WtSearch @close="searchIsOpen = false"/></div>
+
+    <TheFilters @open-search="searchIsOpen = true" />
 
     <div class="feeds">
       <FeedCard
@@ -22,11 +24,15 @@ import FeedCard from '../FeedCard/FeedCard.vue';
 import TheFilters from '../TheFilters/TheFilters.vue';
 import {mapActions, mapGetters} from 'vuex';
 import vk from '../../assets/img/vk.png';
+import WtSearch from "../ui/WtSearch/WtSearch";
 
 export default {
-  components: {FeedCard, TheFilters},
+  components: {WtSearch, FeedCard, TheFilters},
   data() {
+
     return {
+			searchIsOpen: false,
+
       feedCards: [
         {
           title: '26 / 647. Как в РТ МИС «вездекод» покоряли | ВКонтакте',
@@ -59,7 +65,11 @@ export default {
     ...mapActions(['getStats'])
   },
   computed: {
-    ...mapGetters(['stats', 'userInfo'])
+    ...mapGetters(['stats', 'userInfo']),
+
+		classList() {
+			return {'content__search--hidden': !this.searchIsOpen}
+		}
   },
   mounted() {
     this.getStats(this.userInfo);
