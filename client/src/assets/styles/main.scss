@@ -1,0 +1,169 @@
+@import "variables";
+@import "mixins";
+@import "fonts";
+
+body {
+  font-family: var(--font-family);
+  color: var(--theme-text);
+  overflow-x: hidden;
+  background-color: var(--theme-bg-main);
+  font-size: 16px;
+  min-width: 360px;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  padding: 0 35px;
+}
+
+
+input,
+textarea,
+button,
+a {
+  $base-transition-timing: .25s;
+
+  transition: opacity $base-transition-timing,
+    color $base-transition-timing,
+    box-shadow $base-transition-timing,
+    background-color $base-transition-timing,
+    transition $base-transition-timing;
+}
+
+input, button, textarea, a {
+  font-family: var(--font-family);
+
+  &:focus-visible {
+    @include outline;
+  }
+}
+
+
+/* Tooltip */
+.tooltip {
+  display: block;
+  z-index: 10000;
+
+  .tooltip-inner {
+    background: var(--theme-bg-contrast);
+    color: var(--theme-text);
+    border-radius: 6px;
+    padding: 7px 8px;
+    box-shadow: var(--shadow-main);
+    font-size: 14px;
+  }
+
+  .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+    border-color: var(--theme-bg-contrast);
+  }
+
+  &[x-placement^="top"] {
+    margin-bottom: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 0 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      bottom: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^="bottom"] {
+    margin-top: 5px;
+
+    .tooltip-arrow {
+      border-width: 0 5px 5px 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-top-color: transparent !important;
+      top: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^="right"] {
+    margin-left: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 5px 0;
+      border-left-color: transparent !important;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      left: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[x-placement^="left"] {
+    margin-right: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 0 5px 5px;
+      border-top-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      right: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .15s, visibility .15s;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .15s;
+  }
+}
+
+@keyframes trigger {
+  0%, 50%, 100% {
+    transform: translate(0);
+  }
+  10%, 30% {
+    transform: translate(-2px);
+  }
+  20%, 40% {
+    transform: translate(2px);
+  }
+}
+
+// Modal transitions
+.modal-enter-active, .modal-leave-active {
+  transition: transform .25s ease-out;
+}
+.modal-enter, .modal-leave-to {
+  transform: translateX(100%);
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .25s ease-out;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+

@@ -1,0 +1,42 @@
+.message {
+  background-color: var(--theme-bg-contrast);
+  border-radius: var(--radius-main);
+  box-shadow: var(--shadow-main);
+  border: var(--border-main);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 340px;
+  width: 100%;
+  padding: 35px 30px 30px;
+
+  &--center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &--fixed {
+    position: fixed;
+  }
+
+  &__icon {
+    fill: var(--color-red);
+  }
+
+  &__content {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--theme-text);
+    font-size: 16px;
+    line-height: 1.2;
+
+    p {
+      margin-top: 0;
+    }
+  }
+}

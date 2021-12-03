@@ -1,0 +1,69 @@
+.burger {
+  width: 28px;
+  height: 26px;
+
+  padding: 5px;
+
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  border-radius: 2px;
+
+
+  &:hover &__inner,
+  &:hover::before,
+  &:hover::after {
+    opacity: .7;
+  }
+
+  &__inner,
+  &::before,
+  &::after, {
+    content: '';
+
+    position: absolute;
+    left: 5px;
+
+    width: calc(100% - 10px);
+    height: 2px;
+    border-radius: 2px;
+
+    background-color: var(--theme-text);
+    transition: transform .25s,
+      background-color .25s,
+      opacity .25s;
+  }
+
+  &--opened &__inner {
+    transform: translateX(25%);
+    //background-color: var(--color-blue);
+
+  }
+
+  &--opened:before {
+    transform: translateX(-25%);
+    background-color: var(--color-blue);
+  }
+
+  &--opened:after {
+    transform: translateX(-25%);
+    background-color: var(--color-red);
+  }
+
+  &__inner  {
+    top: calc(50% - 1px);
+  }
+
+  &::before {
+    top: 5px;
+  }
+
+  &::after {
+    bottom: 5px;
+  }
+
+  &:focus-visible {
+    @include outline;
+  }
+
+}

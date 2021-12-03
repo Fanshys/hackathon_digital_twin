@@ -1,0 +1,123 @@
+.checkbox {
+  $this: &;
+
+  &--disabled {
+    opacity: .6;
+  }
+
+  &--disabled .checkbox-label {
+    cursor: initial;
+  }
+
+  &__check {
+    width: 17px;
+    height: 17px;
+
+    box-shadow: var(--shadow-main);
+    background-color: var(--color-gray);
+    border: 1px solid var(--color-gray);
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-row: span auto-fill;
+
+    transition: background-color .2s, border-color .2s;
+  }
+
+  &__content {
+    font-size: 14px;
+    line-height: 1.14;
+    color: var(--theme-text);
+  }
+
+  &__icon {
+    transition: stroke-dashoffset .3s;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 12;
+}
+
+  &__input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    position: absolute;
+    left: -1000px;
+
+    border-radius: inherit;
+
+    &:checked + .checkbox__check {
+      background-color: var(--theme-main);
+      border-color: var(--theme-main);
+
+      .checkbox__icon {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    &:focus-visible + .checkbox__check {
+      @include outline;
+    }
+  }
+
+  &__error {
+    display: block;
+    font-size: 11px;
+    margin-top: 4px;
+    color: var(--color-red);
+  }
+
+  &-label {
+    cursor: pointer;
+
+    display: grid;
+    align-items: center;
+    grid-template-columns: min-content 1fr;
+    grid-gap: 10px;
+
+    &--toggle {
+      #{$this} {
+        &__check {
+          position: relative;
+
+          width: 36px;
+          height: 16px;
+
+          box-shadow: var(--shadow-main);
+          background-color: var(--color-gray);
+          border: 1px solid var(--color-gray);
+          border-radius: 20px;
+
+          grid-row: span auto-fill;
+
+          transition: background-color .2s, border-color .2s;
+
+          &::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background-color: var(--color-white);
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            border-radius: 50%;
+            transition: transform .3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+          }
+        }
+
+        &__input:checked + .checkbox__check {
+          background-color: var(--theme-main);
+          border-color: var(--theme-main);
+
+          &::before {
+            transform: translateX(20px);
+          }
+        }
+      }
+    }
+  }
+}

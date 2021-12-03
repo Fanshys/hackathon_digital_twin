@@ -1,0 +1,62 @@
+.file-input {
+
+  &__inner {
+    background-color: var(--theme-bg-main);
+    border-radius: var(--radius-main);
+    box-shadow: var(--shadow-main);
+    color: var(--color-max-gray);
+    border: 2px dashed #E2E2E2;
+    font-size: 12px;
+
+    padding: 20px;
+    min-height: 95px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+
+    transition: .2s;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    opacity: .6;
+  }
+
+  &__native-input {
+    background: transparent;
+    font-size: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    cursor: pointer;
+    border-radius: inherit;
+
+    &:focus-visible {
+      @include outline;
+    }
+
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+  }
+
+  &__text {
+    text-align: center;
+  }
+
+  &__label {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+}

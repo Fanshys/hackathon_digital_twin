@@ -1,0 +1,21 @@
+.auth-forms {
+  max-width: 600px;
+  padding: 70px;
+  overflow-y: auto;
+  max-height: 100vh;
+  &__info {
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: 45px;
+  }
+
+  &__form {
+    padding-top: 45px;
+  }
+
+  &::v-deep &__form-button {
+    margin-top: 30px;
+    min-width: 200px;
+  }
+}

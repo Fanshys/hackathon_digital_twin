@@ -1,0 +1,12 @@
+.card-wide-content {
+  margin-left: -20px;
+  margin-right: -20px;
+
+  &--no-top {
+    margin-top: -15px;
+  }
+
+  &--no-bottom {
+    margin-bottom: -15px;
+  }
+}

@@ -1,0 +1,12 @@
+.fade-transition-enter-active,
+.fade-transition-leave-active,
+::v-deep .fade-transition-enter-active,
+::v-deep .fade-transition-leave-active {
+  transition: opacity .25s;
+}
+.fade-transition-enter,
+.fade-transition-leave-to,
+::v-deep .fade-transition-enter,
+::v-deep .fade-transition-leave-to {
+  opacity: 0;
+}

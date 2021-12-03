@@ -1,0 +1,41 @@
+:root {
+  /* Text */
+  --font-family: 'Roboto', sans-serif;
+
+  /* Radius's */
+  --radius-main: 10px;
+
+  /* Borders */
+  --border-main: 1px solid rgba(0, 0, 0, 0.06);
+
+  /* Shadows */
+  --shadow-main: 0px 4px 8px rgba(0, 0, 0, 0.08);
+
+  /* Colors */
+
+  --color-red: #F96230;
+  --color-red-op-8: #{rgba(#F96230, .8)};
+  --color-blue: #45DDDD;
+  --color-blue-op-5: #{rgba(#45DDDD, .5)};
+  --color-blue-op-2: #{rgba(#45DDDD, .2)};
+  --color-black: #403F3F;
+  --color-white: white;
+  --color-light-gray: #f5f5f5;
+  --color-medium-gray: #F9F9F9;
+  --color-max-gray: #B0B0B0;
+  --color-gray: #D7D6D6;
+  --color-dark-gray: #747474;
+  --color-green: #41D47C;
+
+  /* Gradients */
+  --gradient-blue: linear-gradient(56.31deg, #86E0E0 -0.32%, #86E6CD 105.9%, #64F5F5 105.91%);
+  --gradient-red:  linear-gradient(56.31deg, #86E0E0 -0.32%, #86E6CD 105.9%, #64F5F5 105.91%);
+
+  /* Theme color system */
+  --theme-text: var(--color-black); /* Цвет для текста */
+  --theme-text-secondary: var(--color-gray); /* Цвет для второстепенного текста */
+  --theme-main: var(--color-blue); /* Главный цвет */
+  --theme-main-op-5: var(--color-blue-op-5); /* Главный цвет */
+  --theme-bg-main: var(--color-light-gray); /* Цвет для фона */
+  --theme-bg-contrast: var(--color-white); /* Цвет для фона, контрастирущего с --theme-bg-main */
+}

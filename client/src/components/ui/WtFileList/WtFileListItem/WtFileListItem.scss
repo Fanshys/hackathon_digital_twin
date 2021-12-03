@@ -1,0 +1,77 @@
+.file-item {
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-main);
+  box-shadow: var(--shadow-main);
+  background-color: var(--theme-bg-contrast);
+  position: relative;
+  overflow: hidden;
+
+  $this: &;
+
+  &:focus-visible {
+    @include outline;
+
+    #{$this}__delete {
+      transform: translate(0%, -50%);
+    }
+  }
+
+  &__type {
+    padding: 12px 15px;
+    background-color: var(--theme-main);
+    border-radius: var(--radius-main);
+  }
+
+  &__info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    padding-left: 16px;
+  }
+
+  &__name {
+    font-size: 16px;
+    color: var(--theme-text);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+
+  &__size {
+    font-size: 14px;
+    color: var(--theme-text-secondary);
+    line-height: 1.2;
+  }
+
+  &:hover &__delete {
+    transform: translate(0%, -50%);
+  }
+
+  &__delete {
+    background-color: var(--theme-main);
+
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translate(200%, -50%);
+
+    transition: transform .2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    &:focus-visible {
+      @include outline;
+      transform: translate(0%, -50%);
+    }
+  }
+}

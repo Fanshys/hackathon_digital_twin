@@ -1,0 +1,40 @@
+.card {
+  --padding-x: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: var(--border-main);
+  border-radius: var(--radius-main);
+
+  box-shadow: var(--shadow-main);
+
+  background-color: var(--theme-bg-contrast);
+
+  width: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px var(--padding-x) 12px;
+    border-bottom: var(--border-main);
+  }
+
+  &__body {
+    padding: 15px var(--padding-x);
+
+    flex: 1 0 auto;
+  }
+
+  &__footer {
+    display: grid;
+    align-items: center;
+
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-column-gap: 20px;
+
+    padding: 0 var(--padding-x) 15px;
+  }
+}

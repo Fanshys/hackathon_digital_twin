@@ -1,0 +1,17 @@
+.table {
+  border-radius: var(--radius-main);
+  box-shadow: var(--shadow-main);
+  background-color: var(--theme-bg-contrast);
+
+  text-align: left;
+  font-size: 14px;
+
+  border-spacing: 0px;
+  border-collapse: collapse;
+
+  width: 100%;
+
+  &__head {
+    background-color: rgba(0, 0, 0, .06);
+  }
+}

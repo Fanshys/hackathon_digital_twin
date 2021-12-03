@@ -1,0 +1,43 @@
+
+
+.point-loader,
+.point-loader:before,
+.point-loader:after {
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  animation-fill-mode: both;
+  animation: load 1.8s infinite ease-in-out;
+  background-color: var(--color-white);
+}
+
+.point-loader {
+  position: relative;
+  animation-delay: -0.25s;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+  }
+
+  &::before {
+    left: -9px;
+    animation-delay: -0.5s;
+  }
+
+  &::after {
+    left: 9px;
+  }
+}
+
+@keyframes load {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}

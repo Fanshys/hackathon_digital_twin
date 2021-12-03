@@ -1,0 +1,83 @@
+$offsets: 12px;
+
+.stack-loader {
+  $size: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &--fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  &--background {
+    background-color: var(--theme-bg-contrast);
+  }
+
+  &__inner {
+    width: $size;
+    height: $size;
+    position: relative;
+  }
+
+  &__item {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: inherit;
+    height: inherit;
+
+    background-color: var(--color-blue);
+    border-radius: 5px;
+
+    &--first {
+      background-color: var(--color-blue-op-2);
+      animation: 1.2s infinite stack-loader-1 alternate;
+    }
+
+    &--second {
+      background-color: var(--color-blue-op-5);
+    }
+
+    &--third {
+      animation: 1.2s infinite stack-loader-3 alternate;
+    }
+  }
+
+  &__text {
+    max-width: 250px;
+    margin: 20px auto 0;
+
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+@keyframes stack-loader-1 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(($offsets), -($offsets));
+  }
+}
+
+@keyframes stack-loader-3 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-($offsets), ($offsets));
+  }
+}
+

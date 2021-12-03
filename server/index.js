@@ -59,7 +59,7 @@ app.post('/api/stats/', async (req, res) => {
       res.send({
         status: true,
         body: result
-      })
+      });
     } else {
       throw 'Не переданы данные для поиска';
     }

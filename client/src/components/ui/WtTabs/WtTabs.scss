@@ -1,0 +1,27 @@
+.tabs {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  width: 100%;
+  position: relative;
+
+  &__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 10px;
+
+    max-width: 100%;
+    overflow: auto;
+
+    border-radius: var(--radius-main);
+    background-color: var(--color-medium-gray);
+    box-shadow: var(--shadow-main);
+    border: 1px solid #EDEDED;
+    padding: 5px;
+  }
+
+  &__content {
+    width: 100%;
+  }
+}
