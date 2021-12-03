@@ -60,13 +60,14 @@ function parseFile(filePath, searched) {
             .replace(/<\/?[^>]+(>|$)/gi, " ")
             .replace(/ +/g, " ")
             .trim()
-            .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
+            // .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
         }
       });
 
       count++;
     }
 
+    // Краткий текст с искомой строкой
     if (result.desc && result.desc.length > 140) {
       const index = result.desc.indexOf(searched);
       const offset = (140 - searched.length) / 2;
@@ -80,6 +81,7 @@ function parseFile(filePath, searched) {
       result.previewDesc += '...';
     }
 
+    // Тональность высказывания
     if (result.desc) {
       result.mood = analyze(result.desc).score;
     }
@@ -92,7 +94,7 @@ function parseFile(filePath, searched) {
       const index = data.indexOf(searched);
       result.title = data
         .substr(index - 20, index + 20 + searched.length)
-        .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
+        // .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
     }
 
     // Поиск фавиконки
