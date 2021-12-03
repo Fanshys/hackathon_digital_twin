@@ -31,4 +31,14 @@
     right: 100px;
     transform: translateY(-50%);
   }
+
+  &::v-deep {
+    .input__inner-wrap, .input__inner {
+      height: 100%;
+    }
+
+    .input__inner {
+      padding-right: 130px;
+    }
+  }
 }
