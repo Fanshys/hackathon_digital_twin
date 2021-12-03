@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';
 
-const testString = 'Олег';
-
 export function getFilesArrayInDir(folder) {
   const files =  fs.readdirSync(folder);
   let result = [];
@@ -26,20 +24,19 @@ function validateFile(filePath) {
   return path.extname(filePath) === '.html';
 }
 
-function parseFile(filePath) {
+function parseFile(filePath, searched) {
   const data = fs.readFileSync(filePath, 'utf8');
 
-  if (data.includes(testString)) {
+  if (data.includes(searched)) {
     const result = [];
     const $ = cheerio.load(data, null, false);
     $.html();
 
-    $(`:contains(${testString})`).each((i, el) => {
+    $(`:contains(${searched})`).each((i, el) => {
       $(el).find('*').each((i, innerEl) => {
         const innerNode = $(innerEl).clone().children().remove().end();
 
-        if(innerNode.text().includes(testString)) {
-          console.log($(innerEl).parent());
+        if(innerNode.text().includes(searched)) {
           result.push(
             $(innerEl)
               .parent()
@@ -47,7 +44,7 @@ function parseFile(filePath) {
               .replace(/<\/?[^>]+(>|$)/gi, " ")
               .replace(/ +/g, " ")
               .trim()
-              .replace(testString, `<span style="color: red; font-weight: bold;">${testString}</span>`)
+              .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`)
           );
         }
       })
@@ -57,11 +54,11 @@ function parseFile(filePath) {
   }
 }
 
-export function parseFilesArray(array) {
+export function parseFilesArray(array, userInfo) {
   const result = [];
 
   array.forEach(filePath => {
-    const content = parseFile(filePath);
+    const content = parseFile(filePath, userInfo.family_name);
     if (content) {
       result.push({
         filePath,

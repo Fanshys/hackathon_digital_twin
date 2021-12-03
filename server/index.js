@@ -1,5 +1,8 @@
 import express from "express";
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import session from "express-session";
+
 import { getToken, getUserData } from "./api.js";
 import { getFilesArrayInDir, parseFilesArray } from "./parser.js";
 
@@ -15,24 +18,19 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-app.get('/', async (req, res) => {
-  const { data } = await getToken('ovechkin', 'jau4maeQuu');
-  const { data: userInfo } = await getUserData(data.access_token);
+app.use(cookieParser());
+app.use(session({
+  secret: 'hackathon',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}));
 
-  // const files = getFilesArrayInDir('./test_data/');
-  // const result = parseFilesArray(files.slice(0, 5));
-
-  // let html = '';
-  // result.forEach(item => {
-  //   item.content.forEach(content => {
-  //     html += `<p>${content}</p>`;
-  //   })
-  // })
-
-  res.send(userInfo);
-});
 
 app.post('/api/auth/login/', async (req, res) => {
   try {
@@ -51,6 +49,26 @@ app.post('/api/auth/login/', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.post('/api/stats/', async (req, res) => {
+  try {
+    console.log(req.body.userInfo);
+    if (req.body.userInfo) {
+      const files = getFilesArrayInDir('./test_data/');
+      const result = parseFilesArray(files, req.body);
+
+      res.send({
+        status: true,
+        body: result
+      })
+    } else {
+      throw 'Не переданы данные для поиска';
+    }
+  } catch (error) {
+    res.send({
+      status: false,
+      error
+    });
+  }
 });
+
+app.listen(port, () => console.log(`http://localhost:${port}`));

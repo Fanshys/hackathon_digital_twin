@@ -3,21 +3,28 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+
+      <button @click="getStats(userInfo)">ДАЙ СТАТУ</button>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  computed: {
+    ...mapGetters(['userInfo']),
+  },
+  methods: {
+    ...mapActions(['login', 'getStats']),
+  },
   async mounted() {
-    const {data} = await axios.post('http://localhost:3000/api/auth/login/', {
+    await this.login({
       login: 'ovechkin',
       password: 'jau4maeQuu'
     });
-    console.log(data);
   },
 }
 </script>
