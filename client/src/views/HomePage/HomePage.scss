@@ -1,3 +1,24 @@
-.home {
+.main-layout {
+  background-color: #FCFBFC;
+  height: 100vh;
+
   display: grid;
+
+  grid-template-columns: 356px 1fr 585px;
+  grid-template-areas:
+          'sidebar content detail';
+
+  &__sidebar {
+    grid-area: sidebar;
+  }
+
+  &__content {
+    grid-area: content;
+
+    background-color: #fff;
+  }
+
+  &__detail {
+    grid-area: detail;
+  }
 }
