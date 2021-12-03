@@ -6,6 +6,7 @@ function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
+// Рекурсивно получаем все html файлы
 export function getFilesArrayInDir(folder) {
   const files =  fs.readdirSync(folder);
   let result = [];
@@ -28,34 +29,66 @@ function validateFile(filePath) {
   return path.extname(filePath) === '.html';
 }
 
+// Парсим файл по искомой строке
 function parseFile(filePath, searched) {
   const data = fs.readFileSync(filePath, 'utf8');
 
   if (data.includes(searched)) {
-    const result = [];
+    const result = {
+      title: '',
+      link: '',
+      icon: '',
+      desc: ''
+    };
+
     const $ = cheerio.load(data, null, false);
     $.html();
 
-    $(`:contains(${searched})`).each((i, el) => {
-      $(el).find('*').each((i, innerEl) => {
-        const innerNode = $(innerEl).clone().children().remove().end();
+    // Поиск контекста, в котором упоминается искомая строка
+    const el = $(`:contains(${searched})`)[0];
 
-        if(innerNode.text().includes(searched)) {
-          result.push(
-            $(innerEl)
-              .parent()
-              .html()
-              .trim()
-              .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`)
-          );
-        }
-      })
+    $(el).find('*').each((i, innerEl) => {
+      const innerNode = $(innerEl).clone().children().remove().end();
+
+      if(innerNode.text().includes(searched)) {
+        result.desc = $(innerEl)
+          .parent()
+          .html()
+          .replace(/<\/?[^>]+(>|$)/gi, " ")
+          .replace(/ +/g, " ")
+          .trim()
+          .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
+      }
     });
 
-    return result.filter(onlyUnique);
+    // Поиск тайтла страницы
+    const titleNode = $('title');
+    if (titleNode.length) {
+      result.title = titleNode.text().substr(0, 120);
+    } else {
+      const index = data.indexOf(searched);
+      result.title = data
+        .substr(index - 20, index + 20 + searched.length)
+        .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
+    }
+
+    // Поиск фавиконки
+    const iconNode = $('link[rel="icon"]');
+    if (iconNode.length) {
+      result.icon = iconNode.attr('href');
+    }
+
+    // Поиск ссылки на сайт
+    const canonicalNode = $('link[rel="canonical"]');
+    if (canonicalNode.length) {
+      result.link = canonicalNode.attr('href');
+    }
+
+    return result;
   }
 }
 
+// Обход и парсинг всех файлов
 export function parseFilesArray(array, userInfo) {
   const result = [];
 

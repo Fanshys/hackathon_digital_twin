@@ -1,7 +1,7 @@
 <template>
   <article class="feed-card">
     <div class="feed-card__left">
-      <img v-if="icon" :src="icon" alt="icon">
+      <img class="feed-card__icon" v-if="icon" :src="icon" alt="icon">
     </div>
     <div class="feed-card__right">
       <div class="feed-card__header">
@@ -35,7 +35,7 @@
         <span v-if="date" class="feed-card__date">
           {{date}} -
         </span>
-        {{desc}}
+        <span v-html="desc"></span>
       </div>
     </div>
   </article>

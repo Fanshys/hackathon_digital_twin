@@ -6,14 +6,14 @@
 
     <div class="feeds">
       <FeedCard
-        v-for="feedcard of feedCards"
-        :key="feedcard.title"
-        :link="feedcard.link"
+        v-for="feedcard of stats"
+        :key="feedcard.filePath"
+        :link="feedcard.content.link"
         :tags="feedcard.tags"
-        :icon="feedcard.icon"
+        :icon="feedcard.content.icon"
         :date="feedcard.date"
-        :desc="feedcard.desc"
-        :title="feedcard.title"
+        :desc="feedcard.content.desc"
+        :title="feedcard.content.title"
       />
     </div>
   </div>

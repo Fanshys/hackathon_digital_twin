@@ -19,6 +19,11 @@
     background-color: rgba(0, 118, 246, 0.05);;
   }
 
+  &__icon {
+    max-width: 100%;
+    display: block;
+  }
+
   &__header {
     display: flex;
     align-items: center;
