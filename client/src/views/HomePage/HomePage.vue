@@ -7,8 +7,8 @@
 <script>
 
 export default {
-  name: 'AuthPage',
+  name: 'HomePage',
 };
 </script>
 
-<style src="HomePage.scss" lang="scss" scoped></style>
+<style src="./HomePage.scss" lang="scss" scoped></style>
