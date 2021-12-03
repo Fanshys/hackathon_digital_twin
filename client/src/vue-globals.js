@@ -10,6 +10,7 @@ import fileSizeFormat from './filters/fileSizeFormat';
 
 // Plugins
 Vue.use(VTooltip);
+
 Vue.use(Vuelidate);
 Vue.use(ModalDialogs);
 Vue.use(Fragment.Plugin);

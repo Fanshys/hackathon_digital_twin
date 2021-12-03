@@ -23,3 +23,9 @@
     grid-area: detail;
   }
 }
+
+@media screen and (max-width: 1600px) {
+  .main-layout {
+    grid-template-columns: 1fr 2fr 2fr;
+  }
+}
