@@ -1,15 +1,13 @@
 <template>
-  <div class="loginŒ-form">
+  <div class="login-form">
     <WtForm @submit="submit">
       <WtInput
         v-model.trim="$v.formEmail.$model"
-        :error="emailError"
         label="Email"
       />
 
       <WtInput
         v-model.trim="$v.formPassword.$model"
-        :error="passwordError"
         label="Пароль"
         type="password"
       />
@@ -30,7 +28,7 @@ import WtButton from '../ui/WtButton/WtButton';
 import {
   email, password,
 } from '../../helpers/validation/validation';
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'LoginForm',
@@ -51,25 +49,8 @@ export default {
     formPassword: password,
   },
 
-  computed: {
-    ...mapGetters('auth', ['loginErrors', 'loginIsLoading']),
-
-    emailError() {
-      if (this.loginErrors.credentials && this.loginErrors.credentials[0]) {
-        return this.loginErrors.credentials[0];
-      }
-
-      return this.$validationError(this.$v.formEmail, 'email');
-    },
-
-    passwordError() {
-      return this.$validationError(this.$v.formPassword, 'password');
-    },
-  },
-
   methods: {
-    ...mapActions('auth', ['login']),
-    ...mapMutations('auth', ['clearLoginErrors']),
+    ...mapActions(['login']),
     submit() {
       this.$v.$touch();
 
