@@ -77,4 +77,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./FeedCard.scss"></style>
+<style lang="scss" src="./FeedCard.scss" scoped></style>
