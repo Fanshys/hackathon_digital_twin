@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import AuthPage from '../views/AuthPage/AuthPage.vue';
 import authChecker from './routeHandler';
+import HomePage from "../views/HomePage/HomePage";
 
 Vue.use(VueRouter);
 
@@ -19,7 +20,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: AuthPage,
+    component: HomePage,
     meta: {
       layout: 'EmptyLayout',
     },
