@@ -7,6 +7,7 @@ export default {
   getters,
   mutations,
   state: () => ({
-    stats: []
+    stats: [],
+    statsIsLoading: false
   })
 }

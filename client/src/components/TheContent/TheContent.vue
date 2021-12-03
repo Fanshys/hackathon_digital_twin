@@ -3,28 +3,35 @@
     <TheFilters />
 
     <div class="feeds">
-      <FeedCard
-        v-for="feedcard of stats"
-        :key="feedcard.filePath"
-        :link="feedcard.content.link"
-        :tags="feedcard.tags"
-        :icon="feedcard.content.icon"
-        :date="feedcard.date"
-        :desc="feedcard.content.desc"
-        :title="feedcard.content.title"
-      />
+      <template v-if="stats.length">
+        <FeedCard
+          v-for="feedcard of stats"
+          :key="feedcard.filePath"
+          :link="feedcard.content.link"
+          :tags="feedcard.tags"
+          :icon="feedcard.content.icon || defaultIcon"
+          :date="feedcard.date"
+          :desc="feedcard.content.previewDesc || feedcard.content.desc"
+          :title="feedcard.content.title"
+        />
+      </template>
+      <template v-else>
+        <FeedCardSkeleton class="feeds__skeleton" v-for="count of 5" :key="count" />
+      </template>
     </div>
   </div>
 </template>
 
 <script>
 import FeedCard from '../FeedCard/FeedCard.vue';
+import FeedCardSkeleton from '../FeedCardSkeleton/FeedCardSkeleton.vue';
 import TheFilters from '../TheFilters/TheFilters.vue';
 import {mapActions, mapGetters} from 'vuex';
 import vk from '../../assets/img/vk.png';
+import defaultIcon from '../../assets/img/default.png';
 
 export default {
-  components: {FeedCard, TheFilters},
+  components: {FeedCard, TheFilters, FeedCardSkeleton},
   data() {
     return {
       feedCards: [
@@ -52,7 +59,8 @@ export default {
           desc: 'Анализ профиля Анастасии Брусковой, Россия. Все подписчики и друзья Анастасии ВКонтакте, фотографии и видео пользователя, персональные настройки профиля и еще много другой полезной информации. Читать ещё',
           icon: vk
         },
-      ]
+      ],
+      defaultIcon: defaultIcon
     }
   },
   methods: {

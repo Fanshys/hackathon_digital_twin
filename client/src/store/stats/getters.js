@@ -1,5 +1,4 @@
 export default {
-  stats(state) {
-    return state.stats;
-  }
+  stats: (state) => state.stats,
+  statsIsLoading: (state) => state.statsIsLoading
 }

@@ -1,10 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';
+import {analyze} from './analyze.js';
 
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
+console.log(analyze('fuck'));
 
 // Рекурсивно получаем все html файлы
 export function getFilesArrayInDir(folder) {
@@ -38,28 +37,49 @@ function parseFile(filePath, searched) {
       title: '',
       link: '',
       icon: '',
-      desc: ''
+      desc: '',
+      previewDesc: ''
     };
 
     const $ = cheerio.load(data, null, false);
     $.html();
 
     // Поиск контекста, в котором упоминается искомая строка
-    const el = $(`:contains(${searched})`)[0];
+    const elements = $(`:contains(${searched})`);
+    let count = 0;
 
-    $(el).find('*').each((i, innerEl) => {
-      const innerNode = $(innerEl).clone().children().remove().end();
+    while(elements.length >= count && !result.desc) {
+      const el = elements[count];
 
-      if(innerNode.text().includes(searched)) {
-        result.desc = $(innerEl)
-          .parent()
-          .html()
-          .replace(/<\/?[^>]+(>|$)/gi, " ")
-          .replace(/ +/g, " ")
-          .trim()
-          .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
-      }
-    });
+      $(el).find('*').each((i, innerEl) => {
+        const innerNode = $(innerEl).clone().children().remove().end();
+
+        if(innerNode.text().includes(searched)) {
+          result.desc = $(innerEl)
+            .parent()
+            .html()
+            .replace(/<\/?[^>]+(>|$)/gi, " ")
+            .replace(/ +/g, " ")
+            .trim()
+            .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
+        }
+      });
+
+      count++;
+    }
+
+    if (result.desc && result.desc.length > 140) {
+      const index = result.desc.indexOf(searched);
+      const offset = (140 - searched.length) / 2;
+
+      const leftOffset = index - offset > 0 ? index - offset : 0;
+      const rightOffset = index + offset + searched.length > result.desc.length
+        ? result.desc.length
+        : index + offset + searched.length;
+
+      result.previewDesc = result.desc.substr(leftOffset, rightOffset);
+      result.previewDesc += '...';
+    }
 
     // Поиск тайтла страницы
     const titleNode = $('title');
@@ -73,9 +93,15 @@ function parseFile(filePath, searched) {
     }
 
     // Поиск фавиконки
-    const iconNode = $('link[rel="icon"]');
-    if (iconNode.length) {
-      result.icon = iconNode.attr('href');
+    const iconNodeShort = $('link[rel="shortcut icon"]');
+    if (iconNodeShort.length) {
+      result.icon = $(iconNodeShort).attr('href');
+    } else {
+      const iconNode = $('link[rel="icon"]');
+
+      if (iconNode.length) {
+        result.icon = $(iconNode).attr('href');
+      }
     }
 
     // Поиск ссылки на сайт
