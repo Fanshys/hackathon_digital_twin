@@ -1,3 +1,17 @@
 .left-menu-item {
+  &__link {
+    padding: 20px 0 20px 35px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    font-size: 14px;
 
+    transition: background-color .25s, color .25s;
+
+    &:hover,
+    &--active {
+      color: var(--theme-main);
+      background: rgba(0, 118, 246, 0.05);
+    }
+  }
 }
