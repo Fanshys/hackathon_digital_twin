@@ -2,6 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';
 
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
 export function getFilesArrayInDir(folder) {
   const files =  fs.readdirSync(folder);
   let result = [];
@@ -40,9 +44,7 @@ function parseFile(filePath, searched) {
           result.push(
             $(innerEl)
               .parent()
-              .text()
-              .replace(/<\/?[^>]+(>|$)/gi, " ")
-              .replace(/ +/g, " ")
+              .html()
               .trim()
               .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`)
           );
@@ -50,7 +52,7 @@ function parseFile(filePath, searched) {
       })
     });
 
-    return result;
+    return result.filter(onlyUnique);
   }
 }
 

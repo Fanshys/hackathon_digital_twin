@@ -51,10 +51,9 @@ app.post('/api/auth/login/', async (req, res) => {
 
 app.post('/api/stats/', async (req, res) => {
   try {
-    console.log(req.body.userInfo);
     if (req.body.userInfo) {
       const files = getFilesArrayInDir('./test_data/');
-      const result = parseFilesArray(files, req.body);
+      const result = parseFilesArray(files, req.body.userInfo);
 
       res.send({
         status: true,

@@ -1,4 +1,5 @@
 .sidebar {
+  padding-bottom: 45px;
 
   &__head {
     padding: 35px 0;
@@ -51,6 +52,8 @@
     text-decoration: none;
 
     transition: color .25s;
+
+    cursor: pointer;
 
     &:hover {
       color: var(--theme-main);

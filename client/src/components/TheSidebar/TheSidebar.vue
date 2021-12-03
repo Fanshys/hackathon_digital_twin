@@ -23,7 +23,7 @@
 			/>
 		</div>
 
-		<a href="#" class="sidebar__logout">Выйти из системы</a>
+		<button @click="logout" class="sidebar__logout">Выйти из системы</button>
 	</aside>
 </template>
 
@@ -33,6 +33,7 @@ import avatar from '../../assets/img/avatar.png';
 import LeftMenu from "../LeftMenu/LeftMenu";
 import LeftMenuItem from "../LeftMenu/LeftMenuItem/LeftMenuItem";
 import TheSidebarResource from "./TheSidebarResource/TheSidebarResource";
+import { mapActions } from 'vuex';
 
 import resource1 from '../../assets/img/resource-1.png';
 
@@ -85,7 +86,11 @@ export default {
 			return category =>
 				this.resources.filter(item => item.category === category);
 		}
-	}
+	},
+
+	methods: {
+		...mapActions(['logout']),
+	},
 }
 </script>
 

@@ -20,6 +20,7 @@
 <script>
 import FeedCard from '../FeedCard/FeedCard.vue';
 import TheFilters from '../TheFilters/TheFilters.vue';
+import {mapActions, mapGetters} from 'vuex';
 import vk from '../../assets/img/vk.png';
 
 export default {
@@ -53,7 +54,16 @@ export default {
         },
       ]
     }
-  }
+  },
+  methods: {
+    ...mapActions(['getStats'])
+  },
+  computed: {
+    ...mapGetters(['stats', 'userInfo'])
+  },
+  mounted() {
+    this.getStats(this.userInfo);
+  },
 }
 </script>
 
