@@ -21,6 +21,7 @@
 
   &__detail {
     grid-area: detail;
+    overflow-y: auto;
   }
 }
 
