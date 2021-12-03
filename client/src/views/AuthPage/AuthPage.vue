@@ -10,11 +10,20 @@
 import AuthForms from '../../components/AuthForms/AuthForms';
 import background from '../../assets/img/auth-bg.svg';
 import skeleton from '../../assets/img/skeleton.svg';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'AuthPage',
   components: { AuthForms },
+  computed: {
+    ...mapGetters(['isAuth']),
+  },
   data: () => ({ background, skeleton }),
+  mounted() {
+    if (this.isAuth) {
+      this.$router.push('/home');
+    }
+  },
 };
 </script>
 
