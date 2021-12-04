@@ -84,9 +84,12 @@ export default {
     filteredStats() {
       if (this.search && this.stats) {
         return this.stats.filter(stat => {
-          return stat.desc.includes(this.search)
-            || stat.title.includes(this.search)
-            || stat.link.includes(this.search);
+					if (typeof stat.desc === 'string')
+						return stat.desc.includes(this.search);
+					if (typeof stat.title === 'string')
+						return stat.title.includes(this.search);
+					if (typeof stat.link === 'string')
+						return stat.link.includes(this.search);
         });
       }
 
