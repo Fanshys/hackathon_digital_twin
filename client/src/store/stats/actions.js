@@ -12,5 +12,9 @@ export default {
 
   async getStatById({commit, state}, payload) {
     commit('setActiveStat', state.stats.find(item => item.content.id === payload));
+  },
+
+  async searchStats({commit}, payload) {
+    commit('setSearch', payload);
   }
 }

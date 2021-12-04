@@ -1,13 +1,13 @@
 <template>
   <div class="content">
-		<div :class="['content__search', classList]"><WtSearch @close="searchIsOpen = false"/></div>
+		<div :class="['content__search', classList]"><WtSearch @search="searchStats" @close="searchIsOpen = false"/></div>
 
     <TheFilters @open-search="searchIsOpen = true" />
 
     <div class="feeds">
       <template v-if="stats.length">
         <FeedCard
-          v-for="feedcard of stats"
+          v-for="feedcard of filteredStats"
           :key="feedcard.filePath"
           :link="feedcard.content.link"
           :tags="feedcard.tags"
@@ -72,14 +72,26 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getStats'])
+    ...mapActions(['getStats', 'searchStats'])
   },
   computed: {
-    ...mapGetters(['stats', 'userInfo']),
+    ...mapGetters(['stats', 'userInfo', 'search']),
 
 		classList() {
 			return {'content__search--hidden': !this.searchIsOpen}
-		}
+		},
+
+    filteredStats() {
+      if (this.search) {
+        return this.stats.filter(stat => {
+          return stat.content?.desc.includes(this.search)
+            || stat.content?.title.includes(this.search)
+            || stat.content?.link.includes(this.search);
+        });
+      }
+
+      return this.stats;
+    }
   },
   mounted() {
     this.getStats(this.userInfo);

@@ -1,12 +1,11 @@
 .auth-forms-info {
-  &__logo {
-    margin-bottom: 20px;
-    fill: #202020;
-  }
-
   &__text {
     font-size: 18px;
     margin: 0;
     max-width: 275px;
+  }
+
+  &__title {
+    font-size: 40px;
   }
 }

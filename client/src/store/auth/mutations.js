@@ -5,5 +5,9 @@ export default {
 
   setUserInfo(state, payload) {
     state.userInfo = payload;
+  },
+
+  setLoginIsLoading(state, payload) {
+    state.loginIsLoading = payload;
   }
 }

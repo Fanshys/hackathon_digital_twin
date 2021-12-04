@@ -13,7 +13,7 @@
       />
 
       <div>
-        <WtButton class="auth-forms__form-button">
+        <WtButton :loading="loginIsLoading" class="auth-forms__form-button">
           Войти
         </WtButton>
       </div>
@@ -28,7 +28,7 @@ import WtButton from '../ui/WtButton/WtButton';
 import {
   name, password,
 } from '../../helpers/validation/validation';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'LoginForm',
@@ -62,6 +62,10 @@ export default {
       }
     },
   },
+
+  computed: {
+    ...mapGetters(['loginIsLoading'])
+  }
 };
 </script>
 

@@ -10,6 +10,7 @@ export default {
   mutations,
   state: () => (defaultState || {
     isAuth: false,
-    userInfo: {}
+    userInfo: {},
+    loginIsLoading: false
   })
 }

@@ -6,6 +6,8 @@ import rootUrl from "../rootUrl";
 export default {
   async login({commit}, {login, password}) {
     try {
+      commit('setLoginIsLoading', true);
+
       const {data} = await axios.post(`${rootUrl}api/auth/login/`, {
         login: login,
         password: password
@@ -24,6 +26,8 @@ export default {
       }
     } catch (error) {
       commit('setIsAuth', false);
+    } finally {
+      commit('setLoginIsLoading', false);
     }
   },
 

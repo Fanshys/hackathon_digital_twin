@@ -7,5 +7,8 @@ export default {
   },
   setActiveStat(state, payload) {
     state.activeStat = payload;
+  },
+  setSearch(state, payload) {
+    state.search = payload;
   }
 }
