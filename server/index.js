@@ -5,10 +5,10 @@ import authRouter from './routes/auth.routes.js';
 import statsRouter from './routes/stats.routes.js';
 
 const app = express();
-let port = 3000;
+let port = 80;
 
 if (typeof process !== 'undefined' && process.env &&  process.env.NODE_ENV === 'development') {
-  port = 80;
+  port = 3000;
 }
 
 app.use(function (req, res, next) {
