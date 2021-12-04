@@ -28,7 +28,13 @@
 
   &__header {
     display: flex;
-    align-items: center;
+
+    &-text {
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     &-tags {
       margin-left: auto;
@@ -55,6 +61,8 @@
       line-height: 1.2;
       font-weight: bold;
       color: #464646;
+
+      text-decoration: none;
     }
 
     &-link {
@@ -64,6 +72,37 @@
       font-size: 14px;
       line-height: 1.2;
       font-weight: 500;
+    }
+
+    &-mood {
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 1.2;
+
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+
+      border-radius: 10px;
+
+      padding: 2px 8px;
+
+      margin-bottom: 10px;
+      display: block;
+
+      &--gray {
+        color: #A09FA2;
+        background: #F2F2F2;
+      }
+
+      &--red {
+        color: #E4394B;
+        background: rgba(228, 57, 75, 0.13);
+      }
+
+      &--green {
+        color: #51C981;
+        background: rgba(65, 212, 124, 0.16);
+      }
     }
   }
 

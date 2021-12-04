@@ -8,5 +8,9 @@ export default {
     const { data } = await axios.post(`${rootUrl}api/stats/`, {userInfo: payload});
     commit('setStats', data.body);
     commit('setStatsIsLoading', false);
+  },
+
+  async getStatById({commit, state}, payload) {
+    commit('setActiveStat', state.stats.find(item => item.content.id === payload));
   }
 }

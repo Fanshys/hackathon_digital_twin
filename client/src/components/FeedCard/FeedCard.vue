@@ -6,7 +6,8 @@
     <div class="feed-card__right">
       <div class="feed-card__header">
         <div class="feed-card__header-text">
-          <p class="feed-card__header-title">{{title}}</p>
+          <span class="feed-card__header-mood" :class="moodObj.class">{{moodObj.text}}</span>
+          <a href="#" class="feed-card__header-title" @click="getStatById(id)">{{title}}</a>
           <a v-if="link" target="_blank" :href="link" class="feed-card__header-link">{{link.substr(0, 60)}}</a>
         </div>
         <div class="feed-card__header-tags">
@@ -43,6 +44,7 @@
 
 <script>
 import WtDropdown from '../ui/WtDropdown/WtDropdown.vue';
+import {mapActions} from 'vuex';
 
 export default {
   components: {
@@ -72,8 +74,43 @@ export default {
     date: {
       type: String,
       default: null
+    },
+    mood: {
+      type: Number,
+      default: 0
+    },
+    id: {
+      type: [Number, String],
+      required: true
     }
-  }
+  },
+  computed: {
+    moodObj() {
+      let result;
+
+      if (this.mood < 0) {
+        result = {
+          text: 'Негативное',
+          class: 'feed-card__header-mood--red'
+        }
+      } else if (this.mood > 0) {
+        result = {
+          text: 'Позитивное',
+          class: 'feed-card__header-mood--green'
+        }
+      } else {
+        result = {
+          text: 'Нейтральное',
+          class: 'feed-card__header-mood--gray'
+        }
+      }
+
+      return result;
+    }
+  },
+  methods: {
+    ...mapActions(['getStatById'])
+  },
 }
 </script>
 

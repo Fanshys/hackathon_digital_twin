@@ -27,7 +27,7 @@ function validateFile(filePath) {
 }
 
 // Парсим файл по искомой строке
-function parseFile(filePath, searched) {
+function parseFile(filePath, searched, id) {
   const data = fs.readFileSync(filePath, 'utf8');
 
   if (data.includes(searched)) {
@@ -37,7 +37,9 @@ function parseFile(filePath, searched) {
       icon: '',
       desc: '',
       previewDesc: '',
-      mood: 0
+      mood: 0,
+      id: id,
+      img: ''
     };
 
     const $ = cheerio.load(data, null, false);
@@ -109,6 +111,12 @@ function parseFile(filePath, searched) {
       }
     }
 
+    // Поиск картинки
+    const imgNode = $('meta[property="og:image"]');
+    if (imgNode.length) {
+      result.img = imgNode.attr('content');
+    }
+
     // Поиск ссылки на сайт
     const canonicalNode = $('link[rel="canonical"]');
     if (canonicalNode.length) {
@@ -122,15 +130,18 @@ function parseFile(filePath, searched) {
 // Обход и парсинг всех файлов
 export function parseFilesArray(array, userInfo) {
   const result = [];
+  let count = 1;
 
   array.forEach(filePath => {
-    const content = parseFile(filePath, userInfo.family_name);
+    const content = parseFile(filePath, userInfo.family_name, count);
     if (content) {
       result.push({
         filePath,
         content
       });
     }
+
+    count++;
   });
 
   return result;

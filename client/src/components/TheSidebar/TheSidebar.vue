@@ -1,7 +1,7 @@
 <template>
 	<aside class="sidebar">
 		<div class="sidebar__head">
-			<UserPreview :avatar="avatar" name="Брускова Анастасия" />
+			<UserPreview :avatar="avatar" :name="`${userInfo.family_name} ${userInfo.given_name}`" />
 		</div>
 
 		<div class="sidebar__section">
@@ -29,11 +29,11 @@
 
 <script>
 import UserPreview from '../UserPreview/UserPreview';
-import avatar from '../../assets/img/avatar.png';
+import avatar from '../../assets/img/avatar-default.png';
 import LeftMenu from "../LeftMenu/LeftMenu";
 import LeftMenuItem from "../LeftMenu/LeftMenuItem/LeftMenuItem";
 import TheSidebarResource from "./TheSidebarResource/TheSidebarResource";
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import resource1 from '../../assets/img/resource-1.png';
 
@@ -92,10 +92,11 @@ export default {
 	}),
 
 	computed: {
+		...mapGetters(['userInfo']),
 		childs() {
 			return category =>
 				this.resources.filter(item => item.category === category);
-		}
+		},
 	},
 
 	methods: {

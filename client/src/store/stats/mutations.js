@@ -4,5 +4,8 @@ export default {
   },
   setStatsIsLoading(state, payload) {
     state.statsIsLoading = payload;
+  },
+  setActiveStat(state, payload) {
+    state.activeStat = payload;
   }
 }
