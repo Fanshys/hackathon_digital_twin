@@ -9,6 +9,7 @@ export default {
   state: () => ({
     stats: [],
     activeStat: null,
-    statsIsLoading: false
+    statsIsLoading: false,
+    search: ''
   })
 }

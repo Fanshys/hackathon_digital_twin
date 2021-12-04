@@ -1,8 +1,8 @@
 <template>
   <div class="auth-forms-info">
-    <h1>Создайте своего цифрового двойника!</h1>
+    <h1 class="auth-forms-info__title">Digital Mirror</h1>
     <p class="auth-forms-info__text">
-      Загляни в цифровое зеркало!
+      Загляни в своё Цифровое Зеркало!
     </p>
   </div>
 </template>
