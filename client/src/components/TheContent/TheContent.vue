@@ -82,7 +82,7 @@ export default {
 		},
 
     filteredStats() {
-      if (this.search) {
+      if (this.search && this.stats) {
         return this.stats.filter(stat => {
           return stat.content?.desc.includes(this.search)
             || stat.content?.title.includes(this.search)
