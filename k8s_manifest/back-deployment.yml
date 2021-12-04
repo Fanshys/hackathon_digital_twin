@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: digital_twin
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: digital_twin
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: digital_twin
+          image: "lykart/hackaton-back:nginx"
+          ports:
+            - name: http
+              containerPort: 80
