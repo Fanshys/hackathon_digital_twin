@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: "lykart/hackaton-front:nginx"
+          image: "lykart/hackaton-front:nginx-prod"
           lifecycle:
             preStop:
               exec:

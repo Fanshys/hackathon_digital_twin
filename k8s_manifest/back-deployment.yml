@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: digital_twin
-          image: "lykart/hackaton-back:nginx"
+          image: "lykart/hackaton-back:nginx-prod"
           ports:
             - name: http
               containerPort: 80
