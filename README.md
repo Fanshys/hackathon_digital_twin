@@ -1,16 +1,21 @@
 # hackathon_digital_twin
 
-## Install
-### server
+## Запуск локально
+
+## Запуск сервера
 - cd server
 - npm i
-### client
+- npm run dev
+
+## Запуск фронтенда 
 - cd client
 - npm i
+- npm run serve
 
-## Start
-- cd server
-- npm run dev
+
+Для того, чтобы запустить демо также надо закинуть Data Set с тестовыми данными в папку server/test_data(создать) 
+
+после проделанных команд перейти на http://localhost:8080/
 
 ## Resources
 - Figma: https://www.figma.com/file/CZ4rI8TFJKlrr4cxLTasMW/Untitled?node-id=0%3A1
