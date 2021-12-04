@@ -90,7 +90,7 @@ function parseFile(filePath, searched, id) {
       result.previewDesc += '...';
     }
 
-    // Тональность высказывания
+    // Определение тональности высказывания
     if (result.desc) {
       result.mood = analyze(result.desc).score;
     }
@@ -102,17 +102,17 @@ function parseFile(filePath, searched, id) {
     } else {
       const index = data.indexOf(searched);
       result.title = data
-        .substr(index - 20, index + 20 + searched.length)
+        .substr(index - 20, index + 20 + searched.length);
     }
 
     // Поиск фавиконки
     result.icon = getProperty($, 'link[rel="shortcut icon"]', 'href')
       || getProperty($, 'link[rel="icon"]', 'href');
 
-    // Поиск картинки
+    // Поиск картинки новости
     result.img = getProperty($, 'meta[property="og:image"]', 'content');
 
-    // Поиск ссылки на сайт
+    // Поиск ссылки на сайт-источник
     result.link = getProperty($, 'link[rel="canonical"]', 'href');
 
     return result;

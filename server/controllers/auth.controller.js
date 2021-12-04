@@ -23,7 +23,7 @@ async function getToken(login, password) {
   return await axios(config);
 }
 
-async function getUserData(token) {
+export async function getUserData(token) {
   const config = {
     method: 'get',
     url: 'https://tvscp.tionix.ru/realms/master/protocol/openid-connect/userinfo',
@@ -32,7 +32,12 @@ async function getUserData(token) {
     },
   };
 
-  return axios(config);
+  const {data} = await axios(config);
+
+  return {
+    ...data,
+    token
+  };
 }
 
 export async function login(req, res) {
@@ -42,22 +47,19 @@ export async function login(req, res) {
   try {
     if (login && password) {
       const { data } = await getToken(login, password);
-      const { data: userInfo } = await getUserData(data.access_token);
+      const userInfo = await getUserData(data.access_token);
 
       return {
         status: true,
         body: userInfo
       };
     } else {
-      return {
-        status: false,
-        error: 'Не передан логин или пароль'
-      }
+      throw 'Не передан логин или пароль';
     }
   } catch (error) {
     return {
       status: false,
-      error: error.response.status === 401 ? 'Переданы не верные данные для входа' : error
+      error: error.response && error.response.status === 401 ? 'Переданы не верные данные для входа' : error,
     };
   }
 }
