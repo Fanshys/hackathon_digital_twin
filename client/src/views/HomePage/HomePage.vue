@@ -29,7 +29,7 @@ export default {
 	computed: {
 		...mapGetters(['activeStat']),
 		stat() {
-			return this.activeStat?.content || {};
+			return this.activeStat || {};
 		}
 	}
 	// data: () => ({

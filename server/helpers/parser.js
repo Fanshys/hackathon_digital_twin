@@ -26,20 +26,28 @@ function validateFile(filePath) {
   return path.extname(filePath) === '.html';
 }
 
+function getProperty($, selector, attr) {
+  const node = $(selector);
+
+  if (node.length) {
+    return node.attr(attr);
+  }
+}
+
 // Парсим файл по искомой строке
 function parseFile(filePath, searched, id) {
   const data = fs.readFileSync(filePath, 'utf8');
 
   if (data.includes(searched)) {
     const result = {
-      title: '',
+      id: id,
+      img: '',
+      mood: 0,
       link: '',
       icon: '',
       desc: '',
+      title: '',
       previewDesc: '',
-      mood: 0,
-      id: id,
-      img: ''
     };
 
     const $ = cheerio.load(data, null, false);
@@ -62,7 +70,6 @@ function parseFile(filePath, searched, id) {
             .replace(/<\/?[^>]+(>|$)/gi, " ")
             .replace(/ +/g, " ")
             .trim()
-            // .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
         }
       });
 
@@ -96,32 +103,17 @@ function parseFile(filePath, searched, id) {
       const index = data.indexOf(searched);
       result.title = data
         .substr(index - 20, index + 20 + searched.length)
-        // .replace(searched, `<span style="color: red; font-weight: bold;">${searched}</span>`);
     }
 
     // Поиск фавиконки
-    const iconNodeShort = $('link[rel="shortcut icon"]');
-    if (iconNodeShort.length) {
-      result.icon = $(iconNodeShort).attr('href');
-    } else {
-      const iconNode = $('link[rel="icon"]');
-
-      if (iconNode.length) {
-        result.icon = $(iconNode).attr('href');
-      }
-    }
+    result.icon = getProperty($, 'link[rel="shortcut icon"]', 'href')
+      || getProperty($, 'link[rel="icon"]', 'href');
 
     // Поиск картинки
-    const imgNode = $('meta[property="og:image"]');
-    if (imgNode.length) {
-      result.img = imgNode.attr('content');
-    }
+    result.img = getProperty($, 'meta[property="og:image"]', 'content');
 
     // Поиск ссылки на сайт
-    const canonicalNode = $('link[rel="canonical"]');
-    if (canonicalNode.length) {
-      result.link = canonicalNode.attr('href');
-    }
+    result.link = getProperty($, 'link[rel="canonical"]', 'href');
 
     return result;
   }
@@ -137,7 +129,7 @@ export function parseFilesArray(array, userInfo) {
     if (content) {
       result.push({
         filePath,
-        content
+        ...content
       });
     }
 

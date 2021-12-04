@@ -9,14 +9,14 @@
         <FeedCard
           v-for="feedcard of filteredStats"
           :key="feedcard.filePath"
-          :link="feedcard.content.link"
+          :link="feedcard.link"
           :tags="feedcard.tags"
-          :icon="feedcard.content.icon || defaultIcon"
+          :icon="feedcard.icon || defaultIcon"
           :date="feedcard.date"
-          :desc="feedcard.content.previewDesc || feedcard.content.desc"
-          :mood="feedcard.content.mood"
-          :title="feedcard.content.title"
-          :id="feedcard.content.id"
+          :desc="feedcard.previewDesc || feedcard.desc"
+          :mood="feedcard.mood"
+          :title="feedcard.title"
+          :id="feedcard.id"
         />
       </template>
       <template v-else>
@@ -84,9 +84,9 @@ export default {
     filteredStats() {
       if (this.search && this.stats) {
         return this.stats.filter(stat => {
-          return stat.content?.desc.includes(this.search)
-            || stat.content?.title.includes(this.search)
-            || stat.content?.link.includes(this.search);
+          return stat.desc.includes(this.search)
+            || stat.title.includes(this.search)
+            || stat.link.includes(this.search);
         });
       }
 
