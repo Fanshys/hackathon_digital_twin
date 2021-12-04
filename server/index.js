@@ -5,7 +5,11 @@ import authRouter from './routes/auth.routes.js';
 import statsRouter from './routes/stats.routes.js';
 
 const app = express();
-const port = 3000;
+let port = 3000;
+
+if (typeof process !== 'undefined' && process.env &&  process.env.NODE_ENV === 'development') {
+  port = 80;
+}
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
