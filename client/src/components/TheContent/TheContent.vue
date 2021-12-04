@@ -5,7 +5,7 @@
     <TheFilters @open-search="searchIsOpen = true" />
 
     <div class="feeds">
-      <template v-if="stats.length">
+      <template v-if="stats && stats.length">
         <FeedCard
           v-for="feedcard of filteredStats"
           :key="feedcard.filePath"
