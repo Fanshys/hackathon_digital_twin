@@ -1,7 +1,7 @@
 <template>
 	<aside class="sidebar">
 		<div class="sidebar__head">
-			<UserPreview :avatar="avatar" :name="`${userInfo.family_name} ${userInfo.given_name}`" />
+			<UserPreview v-if="userInfo" :avatar="avatar" :name="`${userInfo.family_name} ${userInfo.given_name}`" />
 		</div>
 
 		<div class="sidebar__section">

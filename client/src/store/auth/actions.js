@@ -34,6 +34,7 @@ export default {
   async logout({commit}) {
     commit('setIsAuth', false);
     commit('setUserInfo', {});
+    commit('setStats', []);
 
     localStorage.removeItem('user');
     router.push('/');
