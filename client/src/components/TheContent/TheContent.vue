@@ -14,7 +14,9 @@
           :icon="feedcard.content.icon || defaultIcon"
           :date="feedcard.date"
           :desc="feedcard.content.previewDesc || feedcard.content.desc"
+          :mood="feedcard.content.mood"
           :title="feedcard.content.title"
+          :id="feedcard.content.id"
         />
       </template>
       <template v-else>

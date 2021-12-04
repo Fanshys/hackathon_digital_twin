@@ -8,6 +8,7 @@ export default {
   mutations,
   state: () => ({
     stats: [],
+    activeStat: null,
     statsIsLoading: false
   })
 }

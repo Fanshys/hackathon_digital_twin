@@ -1,5 +1,7 @@
 .content {
   position: relative;
+  max-height: 100vh;
+  overflow: auto;
 
   &__search {
     box-sizing: border-box;
