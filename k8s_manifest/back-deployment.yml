@@ -5,19 +5,19 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: digital_twin
+      app: digital-twin
       tier: backend
       track: stable
   replicas: 1
   template:
     metadata:
       labels:
-        app: digital_twin
+        app: digital-twin
         tier: backend
         track: stable
     spec:
       containers:
-        - name: digital_twin
+        - name: digital-twin
           image: "lykart/hackaton-back:nginx-prod"
           ports:
             - name: http
