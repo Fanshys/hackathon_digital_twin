@@ -3,8 +3,8 @@
  */
 const authChecker = (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!localStorage.getItem('isAuth')) {
-      next({ path: '/auth' });
+    if (!localStorage.getItem('user')) {
+      next({ path: '/' });
     } else {
       next();
     }

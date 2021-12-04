@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 import AuthPage from '../views/AuthPage/AuthPage.vue';
 import authChecker from './routeHandler';
 import HomePage from "../views/HomePage/HomePage";
-import UiPage from "../views/UiPage/UiPage";
 
 Vue.use(VueRouter);
 
@@ -24,16 +23,9 @@ const routes = [
     component: HomePage,
     meta: {
       layout: 'EmptyLayout',
+      requiresAuth: true,
     },
-  },
 
-  {
-    path: '/ui',
-    name: 'ui',
-    component: UiPage,
-    meta: {
-      layout: 'EmptyLayout',
-    },
   },
 ];
 

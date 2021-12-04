@@ -1,10 +1,12 @@
 import axios from "axios";
 import router from "../../router";
+import rootUrl from "../rootUrl";
+
 
 export default {
   async login({commit}, {login, password}) {
     try {
-      const {data} = await axios.post('http://localhost:3000/api/auth/login/', {
+      const {data} = await axios.post(`${rootUrl}api/auth/login/`, {
         login: login,
         password: password
       });
